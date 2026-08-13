@@ -1,0 +1,100 @@
+CREATE DATABASE IF NOT EXISTS kevinbsis3c;
+
+USE kevinbsis3c;
+
+CREATE TABLE IF NOT EXISTS employee (
+		  EmplyeeID INT NOT NULL PRIMARY KEY,
+		  FirstName VARCHAR(50) NOT NULL,
+		  LastName VARCHAR(50) NOT NULL,
+		  Position VARCHAR(50)NOT NULL
+);
+CREATE TABLE IF NOT EXISTS department (
+		  DepartmentID INT NOT NULL PRIMARY KEY,
+		  DepartmentName VARCHAR(50) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS project (
+		  ProjectID INT NOT NULL PRIMARY KEY,
+		  ProjectName VARCHAR(50) NOT NULL,
+		  DepartmentId VARCHAR(50) NOT NULL  
+);
+CREATE TABLE IF NOT EXISTS attendance (
+		  AttendanceID INT NOT NULL PRIMARY KEY,
+		  EmployeeID VARCHAR(50) NOT NULL,
+		  Date VARCHAR(50) NOT NULL,
+		 Status VARCHAR(50) NOT NULL	
+);
+CREATE TABLE IF NOT EXISTS salary (
+		  SalaryID INT NOT NULL PRIMARY KEY,
+		  EmployeeID VARCHAR(50) NOT NULL,
+		  MonthlySalary VARCHAR(50) NOT NULL,
+		  PayDate VARCHAR(50) NOT NULL	
+);
+INSERT INTO employee (EmplyeeID, FirstName, LastName, Position)
+VALUES ('1', 'John', 'Carter', 'manager')
+
+INSERT INTO employee (EmplyeeID, FirstName, LastName, Position)
+VALUES ('2', 'Lisa', 'Gomez', 'Accountant')
+
+INSERT INTO employee (EmplyeeID, FirstName, LastName, Position)
+VALUES ('3', 'Kevin', 'Reed', 'HR Officer')
+
+INSERT INTO department (DepartmentID, DepartmentName)
+VALUES ('1', 'Human Recources')
+
+INSERT INTO department (DepartmentID, DepartmentName)
+VALUES ('2', 'Accounting')
+
+INSERT INTO department (DepartmentID, DepartmentName)
+VALUES ('3', 'Information Technology')
+
+INSERT INTO project (ProjectID, ProjectName, DepartmentID)
+VALUES ('1', 'Payroll Sytem', 'DEP002')
+
+INSERT INTO project (ProjectID, ProjectName, DepartmentID)
+VALUES ('2', 'Website Upgrade', 'DEP003')
+
+INSERT INTO project (ProjectID, ProjectName, DepartmentID)
+VALUES ('3', 'Recruitment Drive', 'DEP001')
+
+INSERT INTO attendance (AttendanceID, EmployeeID, Date, Status)
+VALUES ('1', '3', '2025-09-01', 'Present')
+
+INSERT INTO attendance (AttendanceID, EmployeeID, Date, Status)
+VALUES ('2', '3', '2025-09-01', 'Present')
+
+INSERT INTO attendance (AttendanceID, EmployeeID, Date, Status)
+VALUES ('3', '3', '2025-09-01', 'Present')
+ 
+ INSERT INTO salary (SalaryID, EmployeeID, MonthlySalary, Paydate)
+VALUES ('1', '1', '60.000', '2025-09-30')
+
+INSERT INTO salary (SalaryID, EmployeeID, MonthlySalary, Paydate)
+VALUES ('2', '2', '45.000', '2025-09-30')
+
+INSERT INTO salary (SalaryID, EmployeeID, MonthlySalary, Paydate)
+VALUES ('3', '3', '40.000', '2025-09-30')
+
+ALTER TABLE employee 
+ADD username VARCHAR (50);
+
+ALTER TABLE employee 
+ADD password VARCHAR (50);
+
+UPDATE employee SET username= 'markkevin'
+WHERE EmployeeID ='1'
+
+UPDATE employee SET password= '091092'
+WHERE EmployeeID ='1'
+
+UPDATE employee SET username= 'kebs'
+WHERE EmployeeID = '2'
+
+UPDATE employee SET username= '12345'
+WHERE EmployeeID = '2'
+
+UPDATE employee SET username= 'Banaria'
+WHERE EmployeeID = '3'
+
+UPDATE employee SET password= '1122'
+WHERE EmployeeID = '3'
+
