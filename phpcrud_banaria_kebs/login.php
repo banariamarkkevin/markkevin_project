@@ -37,10 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // ------------------ CREATE ACCOUNT ------------------
     elseif ($action === 'register') {
-        $firstname = trim($_POST['firstname'] ?? '');
-        $lastname  = trim($_POST['lastname'] ?? '');
-        $username  = trim($_POST['username'] ?? '');
-        $password  = trim($_POST['password'] ?? '');
+        $firstname  = trim($_POST['firstname'] ?? '');
+        $lastname   = trim($_POST['lastname'] ?? '');
+        $cource     = trim($_POST['cource'] ?? '');
+        $year_level = trim($_POST['year_level'] ?? '');
+        $username   = trim($_POST['username'] ?? '');
+        $password   = trim($_POST['password'] ?? '');
 
         // Check if username exists
         $checkQuery = "SELECT id FROM students WHERE Username = ?";
@@ -52,9 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($checkResult->num_rows > 0) {
             $error = 'Username is already taken.';
         } else {
-            $insertQuery = "INSERT INTO students (firstname, lastname, Username, Password) VALUES (?, ?, ?, ?)";
+            $insertQuery = "INSERT INTO students (firstname, lastname, cource, year_level, Username, Password) VALUES (?, ?, ?, ?, ?, ?)";
             $insertStmt = $conn->prepare($insertQuery);
-            $insertStmt->bind_param("ssss", $firstname, $lastname, $username, $password);
+            $insertStmt->bind_param("ssssss", $firstname, $lastname, $cource, $year_level, $username, $password);
 
             if ($insertStmt->execute()) {
                 $success = 'Account created successfully! Please log in.';
@@ -131,6 +133,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="mb-3">
                     <label for="reg_lastname" class="form-label">Last Name</label>
                     <input type="text" name="lastname" id="reg_lastname" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="reg_cource" class="form-label">Course</label>
+                    <input type="text" name="cource" id="reg_cource" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="reg_year_level" class="form-label">Year Level</label>
+                    <input type="text" name="year_level" id="reg_year_level" class="form-control" required>
                 </div>
 
                 <div class="mb-3">

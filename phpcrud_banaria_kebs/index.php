@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 
 include 'database.php';
 
-$query = "SELECT id, firstname, lastname FROM students";
+$query = "SELECT id, firstname, lastname, cource, year_level FROM students";
 $result = $conn->query($query);
 
 // Store rows in an array
@@ -41,7 +41,7 @@ if ($result && $result->num_rows > 0) {
 
     <!-- Search Bar -->
     <div class="mb-3">
-        <input type="text" id="searchInput" class="form-control" placeholder="Search student by name...">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search student by name, course, or year level...">
     </div>
 
     <table class="table table-bordered">
@@ -49,6 +49,8 @@ if ($result && $result->num_rows > 0) {
             <tr>
                 <th>First Name</th>
                 <th>Last Name</th>
+                <th>Course</th>
+                <th>Year Level</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -58,6 +60,8 @@ if ($result && $result->num_rows > 0) {
                     <tr class="student-row">
                         <td class="first-name"><?php echo htmlspecialchars($row['firstname']); ?></td>
                         <td class="last-name"><?php echo htmlspecialchars($row['lastname']); ?></td>
+                        <td class="cource"><?php echo htmlspecialchars($row['cource']); ?></td>
+                        <td class="year-level"><?php echo htmlspecialchars($row['year_level']); ?></td>
                         <td>
                             <!-- Edit Button -->
                             <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?php echo $row['id']; ?>">Edit</button>
@@ -68,7 +72,7 @@ if ($result && $result->num_rows > 0) {
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr id="noDataRow">
-                    <td colspan="3" class="text-center">No students found.</td>
+                    <td colspan="5" class="text-center">No students found.</td>
                 </tr>
             <?php endif; ?>
         </tbody>
@@ -92,6 +96,14 @@ if ($result && $result->num_rows > 0) {
           <div class="mb-3">
             <label class="form-label">Last Name</label>
             <input type="text" name="lastname" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Course</label>
+            <input type="text" name="cource" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Year Level</label>
+            <input type="text" name="year_level" class="form-control" required>
           </div>
         </div>
         <div class="modal-footer">
@@ -124,6 +136,14 @@ if ($result && $result->num_rows > 0) {
                     <label class="form-label">Last Name</label>
                     <input type="text" name="lastname" class="form-control" value="<?php echo htmlspecialchars($row['lastname']); ?>" required>
                   </div>
+                  <div class="mb-3">
+                    <label class="form-label">Course</label>
+                    <input type="text" name="cource" class="form-control" value="<?php echo htmlspecialchars($row['cource']); ?>" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Year Level</label>
+                    <input type="text" name="year_level" class="form-control" value="<?php echo htmlspecialchars($row['year_level']); ?>" required>
+                  </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -147,8 +167,10 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
     rows.forEach(row => {
         const firstName = row.querySelector('.first-name').textContent.toLowerCase();
         const lastName = row.querySelector('.last-name').textContent.toLowerCase();
+        const cource = row.querySelector('.cource').textContent.toLowerCase();
+        const yearLevel = row.querySelector('.year-level').textContent.toLowerCase();
         
-        if (firstName.includes(filter) || lastName.includes(filter)) {
+        if (firstName.includes(filter) || lastName.includes(filter) || cource.includes(filter) || yearLevel.includes(filter)) {
             row.style.display = '';
         } else {
             row.style.display = 'none';
