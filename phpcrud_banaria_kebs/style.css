@@ -1,11 +1,3 @@
-Absolutely. Your CRUD structure is already good. You mainly need a modern `nature.css` with **glassmorphism, colorful animated gradients, glowing effects, and smooth hover animations**.
-
-Replace your current `nature.css` with this:
-
-```css
-/* =========================================================
-   ANIMATED GLASSMORPHISM CRUD DESIGN
-   ========================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
